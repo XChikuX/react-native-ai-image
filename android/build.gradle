@@ -31,7 +31,6 @@ apply plugin: "kotlin-android"
 
 // Apply Nitrogen autolinking (adds generated Kotlin sources + boost message).
 apply from: '../nitrogen/generated/android/NitroAiImage+autolinking.gradle'
-apply from: "./fix-prefab.gradle"
 
 if (isNewArchitectureEnabled()) {
   apply plugin: "com.facebook.react"
@@ -53,11 +52,12 @@ android {
   namespace "com.aiimage"
 
   ndkVersion getExtOrDefault("ndkVersion")
-  compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
+
+  compileSdk getExtOrIntegerDefault("compileSdkVersion")
 
   defaultConfig {
-    minSdkVersion getExtOrIntegerDefault("minSdkVersion")
-    targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
+    minSdk getExtOrIntegerDefault("minSdkVersion")
+    targetSdk getExtOrIntegerDefault("targetSdkVersion")
     buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
     externalNativeBuild {
